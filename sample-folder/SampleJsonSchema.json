@@ -1,0 +1,70 @@
+{
+	"$id": "https://example.com/complex-object.schema.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Complex Object",
+	"type": "object",
+	"$defs": {
+		"colors": {
+			"$anchor": "colorAnchor",
+			"type": "string",
+			"enum": [
+				"red",
+				"green",
+				"blue"
+			]
+		}
+	},
+	"properties": {
+		"name": {
+			"not": {
+				"type": "string"
+			}
+		},
+		"age": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"favouriteColor": {
+			"$ref": "#colorAnchor",
+			"enum": [
+				"inContextRed",
+				"inContextGreen",
+				"inContextBlue"
+			]
+		},
+		"address": {
+			"type": "object",
+			"properties": {
+				"street": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+				"postalCode": {
+					"type": "string",
+					"pattern": "\\d{5}"
+				}
+			},
+			"required": [
+				"street",
+				"city",
+				"state",
+				"postalCode"
+			]
+		},
+		"hobbies": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
+	},
+	"required": [
+		"name",
+		"age"
+	]
+}
