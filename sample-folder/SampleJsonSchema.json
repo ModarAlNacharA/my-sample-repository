@@ -12,59 +12,75 @@
         "green",
         "blue"
       ]
+    },
+    "car": {
+      "type": "object",
+      "properties": {
+        "engineType": { "type": "string" },
+        "numWheels": { "type": "integer" }
+      },
+      "required": ["engineType"]
+    },
+    "bike": {
+      "type": "object",
+      "properties": {
+        "bikeType": { "type": "string" },
+        "numGears": { "type": "integer" }
+      },
+      "required": ["bikeType"]
     }
   },
   "properties": {
     "name": {
-      "not": {
-        "type": "string"
-      }
+      "type": "string"
     },
     "age": {
       "type": "integer",
       "minimum": 0
     },
     "favouriteColor": {
-      "$ref": "#colorAnchor",
-      "enum": [
-        "inContextRed",
-        "inContextGreen",
-        "inContextBlue"
-      ]
+      "$ref": "#colorAnchor"
     },
     "address": {
       "type": "object",
       "properties": {
-        "street": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "postalCode": {
-          "type": "string",
-          "pattern": "\\d{5}"
-        }
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "postalCode": { "type": "string", "pattern": "\\d{5}" }
       },
-      "required": [
-        "street",
-        "city",
-        "state",
-        "postalCode"
-      ]
+      "required": [ "street", "city", "state", "postalCode" ]
     },
     "hobbies": {
       "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" }
+    },
+    "vehicleType": {
+      "type": "string",
+      "enum": ["car", "bike"]
     }
   },
   "required": [
     "name",
     "age"
-  ]
+  ],
+  "if": {
+    "properties": { "vehicleType": { "const": "car" } }
+  },
+  "then": {
+    "properties": {
+      "vehicle": {
+        "$ref": "#/$defs/car"
+      }
+    },
+    "required": ["vehicle"]
+  },
+  "else": {
+    "properties": {
+      "vehicle": {
+        "$ref": "#/$defs/bike"
+      }
+    },
+    "required": ["vehicle"]
+  }
 }
