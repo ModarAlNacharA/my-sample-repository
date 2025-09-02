@@ -27,7 +27,7 @@
         "bikeType": { "type": "string" },
         "numGears": { "type": "integer" }
       },
-      "required": ["bikeType"]
+      "required": ["numGears"]
     }
   },
   "properties": {
@@ -84,3 +84,4 @@
     "required": ["vehicle"]
   }
 }
+
