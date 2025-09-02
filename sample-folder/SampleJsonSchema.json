@@ -10,7 +10,8 @@
       "enum": [
         "red",
         "green",
-        "blue"
+        "blue",
+        "yellow"
       ]
     },
     "car": {
@@ -25,9 +26,9 @@
       "type": "object",
       "properties": {
         "bikeType": { "type": "string" },
-        "numGears": { "type": "integer" }
+        "numWheels": { "type": "integer" }
       },
-      "required": ["numGears"]
+      "required": ["bikeType"]
     }
   },
   "properties": {
@@ -36,7 +37,7 @@
     },
     "age": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 18
     },
     "favouriteColor": {
       "$ref": "#colorAnchor"
@@ -84,4 +85,5 @@
     "required": ["vehicle"]
   }
 }
+
 
